@@ -1,24 +1,28 @@
-import { IsNumber, IsString, IsOptional } from 'class-validator';
+import { IsNumber, IsString, IsOptional, IsArray } from 'class-validator';
 
 export class CreateBusDto {
+  @IsString()
+  name!: string; // Name of the bus (required)
+
   @IsNumber()
-  capacity: number;
+  capacity!: number;
 
   @IsString()
-  color: string;
+  color!: string;
 
   @IsNumber()
-  kg: number;
+  kg!: number;
 
   @IsString()
   @IsOptional()
-  fleet?: string;
+  fleet?: string; // Fleet ID as string
 
+  @IsArray()
   @IsString({ each: true })
   @IsOptional()
-  trips?: string[];
+  trips?: string[]; // Array of Trip IDs as strings
 
   @IsString()
   @IsOptional()
-  driver?: string;
+  driver?: string; // Driver ID as string
 }

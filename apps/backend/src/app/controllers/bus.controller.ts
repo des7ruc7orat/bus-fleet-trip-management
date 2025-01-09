@@ -1,15 +1,14 @@
 import { Controller, Get, Post, Put, Delete, Body, Param } from '@nestjs/common';
 import { BusService } from '../services/bus.service';
 import { Bus } from '../schemas/bus.schema';
-import { CreateBusDto } from '../dto/bus.dto';
 
 @Controller('buses')
 export class BusController {
   constructor(private readonly busService: BusService) {}
 
   @Post()
-  async create(@Body() createBusDto: CreateBusDto): Promise<Bus> {
-    return this.busService.create(createBusDto);
+  async create(@Body() busData: Partial<Bus>): Promise<Bus> {
+    return this.busService.create(busData);
   }
 
   @Get()
