@@ -4,30 +4,25 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { Bus, BusSchema } from './schemas/bus.schema';
 import { Person, PersonSchema } from './schemas/person.schema';
-import { Role, RoleSchema } from './schemas/role.schema';
-import { Address, AddressSchema } from './schemas/address.schema';
-import { Fleet, FleetSchema } from './schemas/fleet.schema';
-import { Trip, TripSchema } from './schemas/trip.schema';
 import { BusService } from './services/bus.service';
 import { PersonService } from './services/person.service';
-import { RoleService } from './services/role.service';
-import { AddressService } from './services/address.service';
-import { FleetService } from './services/fleet.service';
-import { TripService } from './services/trip.service';
+import { BusController } from './controllers/bus.controller';
+import { FleetModule } from './modules/fleet.module';
+import { AddressModule } from './modules/address.module';
+import { TripModule } from './modules/trip.module';
 @Module({
   imports: [
     MongooseModule.forRoot('mongodb://localhost:27017/bus-fleet-trip-management'),
     MongooseModule.forFeature([
       { name: Bus.name, schema: BusSchema },
       { name: Person.name, schema: PersonSchema },
-      { name: Role.name, schema: RoleSchema },
-      { name: Address.name, schema: AddressSchema },
-      { name: Fleet.name, schema: FleetSchema },
-      { name: Trip.name, schema: TripSchema },
     ]),
+    FleetModule,
+    AddressModule,
+    TripModule,
   ],
-  controllers: [AppController],
-  providers: [AppService, BusService, PersonService, RoleService, AddressService, FleetService, TripService],
-  exports: [BusService, PersonService, RoleService, AddressService, FleetService, TripService],
+  controllers: [AppController, BusController],
+  providers: [AppService, BusService, PersonService],
+  exports: [BusService, PersonService],
 })
 export class AppModule {}
