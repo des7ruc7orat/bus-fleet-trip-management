@@ -1,6 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
-import { Role } from './role.schema';
 import { Address } from './address.schema';
 import * as mongoose from 'mongoose';
 
@@ -12,17 +11,19 @@ export class Person extends Document {
   @Prop({ required: true })
   secondName: string;
 
-  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Role' })
-  role: Role;
+  @Prop({ required: true })
+  role: string;
 
   @Prop()
-  bornDate: Date;
+  bornDate: Date;t
 
   @Prop()
   phoneNumber: string;
 
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Address' })
   address: Address;
+  @Prop({ required: true })
+  password: string;
 }
 
 export const PersonSchema = SchemaFactory.createForClass(Person);
