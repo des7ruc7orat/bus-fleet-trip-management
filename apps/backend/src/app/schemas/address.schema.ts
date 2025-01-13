@@ -10,7 +10,7 @@ export class Address extends Document {
   city: string;
 
   @Prop({ required: true })
-  plz: string;
+  postCode: string;
 
   @Prop({ required: true })
   street: string;
