@@ -4,7 +4,7 @@ import { InjectModel } from '@nestjs/mongoose';
 
 @Injectable()
 export class SuperService<T extends Document> {
-  constructor(@InjectModel('') private readonly model: Model<T>) {}
+  constructor(@InjectModel('') protected readonly model: Model<T>) {}
 
   async create(data: Partial<T>): Promise<T> {
     const newEntity = new this.model(data);
