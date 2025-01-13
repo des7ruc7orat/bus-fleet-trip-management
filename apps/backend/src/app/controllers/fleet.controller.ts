@@ -1,15 +1,20 @@
-import { Controller, Get, Post, Put, Delete, Body, Param } from '@nestjs/common';
+import { Controller, Get, Post, Put, Delete, Body, Param, UseGuards } from '@nestjs/common';
 import { FleetService } from '../services/fleet.service';
 import { Fleet } from '../schemas/fleet.schema';
 import { CreateFleetDto } from '../dto/fleet.dto';
 import mongoose from 'mongoose';
+import { Roles } from '../decorators/roles.decorator';
+import { AuthGuard } from '@nestjs/passport';
+import { RolesGuard } from '../guards/role.guard';
 
+@UseGuards(AuthGuard('jwt'), RolesGuard) // Apply both authentication and role-based guards globally
 @Controller('fleets')
 export class FleetController {
   constructor(private readonly fleetService: FleetService) {}
 
-  // Create a new fleet
+  // Only admin can create fleets
   @Post()
+  @Roles('admin') // Restrict access to only admin role
   async create(@Body() createFleetDto: CreateFleetDto): Promise<Fleet> {
     const fleetData = {
       ...createFleetDto,
@@ -24,26 +29,30 @@ export class FleetController {
     return this.fleetService.create(fleetData);
   }
 
-  // Get all fleets
+  // Only admin can view all fleets
   @Get()
+  @Roles('admin') // Restrict access to only admin role
   async findAll(): Promise<Fleet[]> {
     return this.fleetService.findAll();
   }
 
-  // Get a fleet by ID
+  // Only admin can view a fleet by ID
   @Get(':id')
+  @Roles('admin') // Restrict access to only admin role
   async findById(@Param('id') id: string): Promise<Fleet> {
     return this.fleetService.findById(id);
   }
 
-  // Update a fleet by ID
+  // Only admin can update a fleet by ID
   @Put(':id')
+  @Roles('admin') // Restrict access to only admin role
   async update(@Param('id') id: string, @Body() updateFleetDto: Partial<Fleet>): Promise<Fleet> {
     return this.fleetService.update(id, updateFleetDto);
   }
 
-  // Delete a fleet by ID
+  // Only admin can delete a fleet by ID
   @Delete(':id')
+  @Roles('admin') // Restrict access to only admin role
   async delete(@Param('id') id: string): Promise<Fleet> {
     return this.fleetService.delete(id);
   }
