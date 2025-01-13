@@ -1,7 +1,10 @@
 {
   "extends": "../../tsconfig.base.json",
   "files": [],
-  "include": [],
+  "include": [
+    "src/types/**/*.d.ts",  // Include the folder where the request.d.ts file is located
+    "src/**/*"              // Ensure the rest of the project files are included too
+  ],
   "references": [
     {
       "path": "./tsconfig.app.json"
