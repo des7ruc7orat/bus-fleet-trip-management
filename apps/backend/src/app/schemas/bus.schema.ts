@@ -3,7 +3,7 @@ import * as mongoose from 'mongoose';
 import { Document } from 'mongoose';
 import { Fleet } from './fleet.schema';
 import { Trip } from './trip.schema';
-import { Person } from './person.schema';
+import { User } from './user.schema';
 
 @Schema()
 export class Bus extends Document {
@@ -24,8 +24,8 @@ export class Bus extends Document {
   @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Trip' }] })
   trips: Trip[];
 
-  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Person' })
-  driver: Person;
+  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'User' })
+  driver: User;
 }
 
 export const BusSchema = SchemaFactory.createForClass(Bus);
