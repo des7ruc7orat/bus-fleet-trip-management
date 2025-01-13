@@ -8,7 +8,7 @@ export class CreateAddressDto {
   city: string;
 
   @IsString()
-  plz: string;
+  postCode: string;
 
   @IsString()
   street: string;
