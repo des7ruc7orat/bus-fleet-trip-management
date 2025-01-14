@@ -1,0 +1,19 @@
+.layout-container {
+  display: flex; /* Enables horizontal layout */
+  height: 100vh; /* Full viewport height */
+  width: 100vw; /* Full viewport width */
+}
+
+app-navigation {
+  flex: 0 0 20rem; /* Fixed width for the navigation in rem */
+  background-color: #f8f9fa; /* Optional: Light background for the navigation */
+  border-right: 1px solid #dcdcdc; /* Optional: Divider */
+  overflow-y: auto; /* Enable scrolling if navigation content overflows */
+}
+
+.content-container {
+  flex: 1; /* Takes the remaining space */
+  padding: 2rem; /* Optional: Add padding for content */
+  overflow-y: auto; /* Enable scrolling for large content */
+  background-color: #ffffff; /* Optional: White background for content */
+}
