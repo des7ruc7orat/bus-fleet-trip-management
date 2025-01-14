@@ -1,0 +1,31 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%; /* Full height */
+  background-color: #f8f9fa; /* Optional background */
+}
+
+::ng-deep {
+.p-megamenu {
+  height: 100%;
+  border: none;
+  margin: 0; /* Remove external spacing */
+  padding: 0; /* Remove internal spacing */
+  gap: 10rem;
+}
+.p-megamenu-root-list {
+  flex-direction: column;
+  height: 100%;
+  margin: 0; /* Remove root list margin */
+  padding: 0; /* Remove root list padding */
+}
+  li.p-menuitem {
+    /* Add your desired styles */
+    padding: 1rem; /* Adjust padding */
+    margin-bottom: 1.5rem; /* Add space below each item */
+    //background-color: #f0f0f0; /* Light gray background */
+    //border-radius: 0.5rem; /* Optional rounded corners */
+    //box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional shadow */
+    //transition: background-color 0.3s ease; /* Smooth hover effect */
+  }
+}
