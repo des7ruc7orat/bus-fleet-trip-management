@@ -10,14 +10,18 @@ export const menuHeaderItem = [
     items: [
       [
         {
-          label: 'List',
-          icon: 'fas fa-list',
-          routerLink: '/bus-list',
-        },
-        {
-          label: 'Form',
-          icon: 'fas fa-file-alt',
-          routerLink: '/bus-form',
+          items: [
+            {
+              label: 'List',
+              icon: 'fas fa-list',
+              routerLink: 'bus-list',
+            },
+            {
+              label: 'Form',
+              icon: 'fas fa-file-alt',
+              routerLink: ['bus-form'],
+            },
+          ],
         },
       ],
     ],
@@ -28,14 +32,18 @@ export const menuHeaderItem = [
     items: [
       [
         {
-          label: 'Form',
-          icon: 'pi pi-list',
-          routerLink: '/fleet-list',
-        },
-        {
-          label: 'List',
-          icon: 'pi pi-pencil',
-          routerLink: '/fleet-form',
+          items: [
+            {
+              label: 'List',
+              icon: 'fas fa-list',
+              routerLink: 'fleet-list',
+            },
+            {
+              label: 'Form',
+              icon: 'fas fa-file-alt',
+              routerLink: ['fleet-form'],
+            },
+          ],
         },
       ],
     ],
@@ -46,14 +54,18 @@ export const menuHeaderItem = [
     items: [
       [
         {
-          label: 'Form',
-          icon: 'pi pi-list',
-          routerLink: '/trip-list',
-        },
-        {
-          label: 'List',
-          icon: 'pi pi-pencil',
-          routerLink: '/trip-form',
+          items: [
+            {
+              label: 'List',
+              icon: 'fas fa-list',
+              routerLink: 'trip-list',
+            },
+            {
+              label: 'Form',
+              icon: 'fas fa-file-alt',
+              routerLink: ['trip-form'],
+            },
+          ],
         },
       ],
     ],
