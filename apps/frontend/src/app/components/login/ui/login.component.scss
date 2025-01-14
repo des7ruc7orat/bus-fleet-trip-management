@@ -1,0 +1,59 @@
+/* Basic form styling */
+.form-container {
+  display: flex;
+  flex-direction: column;
+  border: 0.5rem solid #ccc; /* Thinner border */
+  padding: 1.6rem; /* Padding for the form */
+  border-radius: 0.25rem; /* Smaller rounded corners */
+  width: 50%; /* Ensures it takes up 50% of available width */
+}
+
+.form-row {
+  display: flex;
+  gap: 0.8rem; /* Reduced gap between form fields */
+  align-items: center;
+  margin-bottom: 0.8rem; /* Reduced space between form fields and button */
+}
+
+.form-group {
+  flex: 1 1 45%; /* Flex grow, shrink, and basis for inputs */
+}
+
+.form-button {
+  align-self: center; /* Center the button horizontally */
+  width: auto; /* Ensures the button doesn't take up extra space */
+  margin-top: 0.4rem; /* Reduced space above the button */
+}
+
+/* Optional: To keep the form clean */
+fieldset {
+  border: none; /* Remove default fieldset border */
+  padding: 1rem; /* Add padding to the fieldset */
+  width: auto; /* Adjust the width of the fieldset */
+  margin: 0; /* Remove margin */
+}
+
+p-floatLabel {
+  width: 100%;
+}
+
+/* Media query for smaller screens */
+@media (max-width: 1300px) {
+  .form-container {
+    width: 90%; /* Adjust form width for smaller screens */
+  }
+
+  .form-row {
+    flex-direction: column; /* Stack form fields vertically */
+  }
+
+  .form-group {
+    flex: 1 1 100%; /* Inputs will take full width on small screens */
+    margin-bottom: 1rem; /* Add some space between inputs */
+  }
+
+  .form-button {
+    align-self: center; /* Keep button centered on small screens */
+    width: 100%; /* Button will span the full width on small screens */
+  }
+}
