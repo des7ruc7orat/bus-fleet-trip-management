@@ -1,37 +1,65 @@
 export const menuHeaderItem = [
   {
     label: 'Login',
-    icon: 'pi pi-bus',
+    icon: 'fas fa-sign-in-alt',
+    routerLink: '/login',
   },
   {
-    label: 'Bus Management',
-    icon: 'pi pi-bus',
+    label: 'Bus',
+    icon: 'fas fa-bus',
     items: [
       [
         {
-          label: 'Bus Form',
-          icon: 'pi pi-pencil',
-          routerLink: '/bus-form',
-        },
-        {
-          label: 'Bus List',
-          icon: 'pi pi-list',
+          label: 'List',
+          icon: 'fas fa-list',
           routerLink: '/bus-list',
         },
+        {
+          label: 'Form',
+          icon: 'fas fa-file-alt',
+          routerLink: '/bus-form',
+        },
       ],
     ],
   },
   {
-    label: 'Fleet Management',
-    icon: 'pi pi-truck',
+    label: 'Fleet',
+    icon: 'fas fa-warehouse',
     items: [
       [
         {
-          label: 'Fleet Overview',
-          icon: 'pi pi-eye',
-          routerLink: '/fleet',
+          label: 'Form',
+          icon: 'pi pi-list',
+          routerLink: '/fleet-list',
+        },
+        {
+          label: 'List',
+          icon: 'pi pi-pencil',
+          routerLink: '/fleet-form',
         },
       ],
     ],
+  },
+  {
+    label: 'Trip',
+    icon: 'fas fa-route',
+    items: [
+      [
+        {
+          label: 'Form',
+          icon: 'pi pi-list',
+          routerLink: '/trip-list',
+        },
+        {
+          label: 'List',
+          icon: 'pi pi-pencil',
+          routerLink: '/trip-form',
+        },
+      ],
+    ],
+  },
+  {
+    label: 'Logout',
+    icon: 'fas fa-arrow-right-from-bracket',
   },
 ];
