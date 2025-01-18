@@ -12,7 +12,7 @@ export class BusController {
 
   // Only admin can create buses
   @Post()
-  @Roles('admin')
+  @Roles('admin') // Only 'admin' can access this endpoint
   async create(@Body() busData: Partial<Bus>): Promise<Bus> {
     return this.busService.create(busData);
   }
@@ -33,14 +33,14 @@ export class BusController {
 
   // Only admin can update a bus
   @Put(':id')
-  @Roles('admin')
+  @Roles('admin') // Only 'admin' can access this endpoint
   async update(@Param('id') id: string, @Body() busData: Partial<Bus>): Promise<Bus> {
     return this.busService.update(id, busData);
   }
 
   // Only admin can delete a bus
   @Delete(':id')
-  @Roles('admin')
+  @Roles('admin') // Only 'admin' can access this endpoint
   async delete(@Param('id') id: string): Promise<Bus> {
     return this.busService.delete(id);
   }

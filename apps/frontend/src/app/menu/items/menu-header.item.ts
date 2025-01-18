@@ -3,17 +3,19 @@ export const menuHeaderItem = [
     label: 'Login',
     icon: 'fas fa-sign-in-alt',
     routerLink: '/login',
+    visible: true,  // Initially visible
   },
   {
     label: 'Bus',
     icon: 'fas fa-bus',
+    visible: false,  // Initially visible
     items: [
       [
         {
           items: [
             {
               label: 'List',
-              icon: 'fas fa-list',
+              icon: 'fas fa-bus-list',
               routerLink: 'bus-list',
             },
             {
@@ -29,13 +31,14 @@ export const menuHeaderItem = [
   {
     label: 'Fleet',
     icon: 'fas fa-warehouse',
+    visible: false,
     items: [
       [
         {
           items: [
             {
               label: 'List',
-              icon: 'fas fa-list',
+              icon: 'fas fa-bus-list',
               routerLink: 'fleet-list',
             },
             {
@@ -51,13 +54,14 @@ export const menuHeaderItem = [
   {
     label: 'Trip',
     icon: 'fas fa-route',
+    visible: false,
     items: [
       [
         {
           items: [
             {
               label: 'List',
-              icon: 'fas fa-list',
+              icon: 'fas fa-bus-list',
               routerLink: 'trip-list',
             },
             {
@@ -73,5 +77,6 @@ export const menuHeaderItem = [
   {
     label: 'Logout',
     icon: 'fas fa-arrow-right-from-bracket',
+    visible: false,
   },
 ];

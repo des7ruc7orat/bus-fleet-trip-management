@@ -1,0 +1,76 @@
+<p-toast></p-toast>
+<fieldset>
+  <form class="form-container" (ngSubmit)="onSubmit()">
+    <div class="form-row">
+      <p-floatLabel class="form-group">
+        <input
+          id="bus-name"
+          type="text"
+          pInputText
+          [(ngModel)]="bus().name"
+          name="name"
+        />
+        <label for="bus-name">{{ 'Bus.Name' | translate }}</label>
+      </p-floatLabel>
+
+      <p-floatLabel class="form-group">
+        <input
+          id="bus-capacity"
+          type="number"
+          pInputText
+          [(ngModel)]="bus().capacity"
+          name="busCapacity"
+        />
+        <label for="bus-capacity">Capacity</label>
+      </p-floatLabel>
+    </div>
+
+    <div class="form-row">
+      <p-floatLabel class="form-group">
+        <input
+          id="bus-color"
+          type="text"
+          pInputText
+          [(ngModel)]="bus().color"
+          name="busColor"
+        />
+        <label for="bus-color">Color</label>
+      </p-floatLabel>
+
+      <p-floatLabel class="form-group">
+        <input
+          id="bus-kg"
+          type="number"
+          pInputText
+          [(ngModel)]="bus().kg"
+          name="busKg"
+        />
+        <label for="bus-kg">Weight (kg)</label>
+      </p-floatLabel>
+    </div>
+
+    <!-- Autocomplete for selecting driver -->
+    <div class="form-row">
+      <p-floatLabel class="form-group">
+        <p-autoComplete
+          id="bus-driver"
+          [(ngModel)]="bus().driver"
+          [suggestions]="filteredDrivers"
+          (completeMethod)="searchDriver($event)"
+          optionLabel="name"
+          [minLength]="3"
+          [size]="5"
+          placeholder="Select Driver"
+          name="busDriver"
+        ></p-autoComplete>
+        <label for="bus-driver">Driver</label>
+      </p-floatLabel>
+    </div>
+
+    @if (!config.data) {
+      <p-button  label="Submit" class="form-button" type="submit"></p-button>
+    } @else {
+      <p-button (click)="onUpdate()" label="Update" class="form-button" ></p-button>
+    }
+  </form>
+</fieldset>

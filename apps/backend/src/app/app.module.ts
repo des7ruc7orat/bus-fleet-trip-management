@@ -21,7 +21,7 @@ import { AuthModule } from './modules/auth.module';
     TripModule,
     UserModule,
     AuthModule,
-  ],
+],
   controllers: [AppController, BusController],
   providers: [AppService, BusService],
   exports: [BusService],

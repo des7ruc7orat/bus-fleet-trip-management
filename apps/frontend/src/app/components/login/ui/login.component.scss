@@ -1,18 +1,18 @@
-/* Basic form styling */
+/* Basic bus-form styling */
 .form-container {
   display: flex;
   flex-direction: column;
   border: 0.5rem solid #ccc; /* Thinner border */
-  padding: 1.6rem; /* Padding for the form */
+  padding: 1.6rem; /* Padding for the bus-form */
   border-radius: 0.25rem; /* Smaller rounded corners */
   width: 50%; /* Ensures it takes up 50% of available width */
 }
 
 .form-row {
   display: flex;
-  gap: 0.8rem; /* Reduced gap between form fields */
+  gap: 0.8rem; /* Reduced gap between bus-form fields */
   align-items: center;
-  margin-bottom: 0.8rem; /* Reduced space between form fields and button */
+  margin-bottom: 0.8rem; /* Reduced space between bus-form fields and button */
 }
 
 .form-group {
@@ -25,7 +25,7 @@
   margin-top: 0.4rem; /* Reduced space above the button */
 }
 
-/* Optional: To keep the form clean */
+/* Optional: To keep the bus-form clean */
 fieldset {
   border: none; /* Remove default fieldset border */
   padding: 1rem; /* Add padding to the fieldset */
@@ -40,11 +40,11 @@ p-floatLabel {
 /* Media query for smaller screens */
 @media (max-width: 1300px) {
   .form-container {
-    width: 90%; /* Adjust form width for smaller screens */
+    width: 90%; /* Adjust bus-form width for smaller screens */
   }
 
   .form-row {
-    flex-direction: column; /* Stack form fields vertically */
+    flex-direction: column; /* Stack bus-form fields vertically */
   }
 
   .form-group {

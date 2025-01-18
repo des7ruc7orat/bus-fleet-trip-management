@@ -1,17 +1,17 @@
 <fieldset>
-  <form class="form-container">
+  <form class="form-container" (ngSubmit)="onSubmit()">
     <div class="form-row">
       <p-floatLabel class="form-group">
-        <input id="email" type="text" pInputText />
+        <input id="email" type="text" pInputText [(ngModel)]="loginData.email" name="email" required />
         <label for="email">Email</label>
       </p-floatLabel>
 
       <p-floatLabel class="form-group">
-        <input id="password" type="password" pInputText />
+        <input id="password" type="password" pInputText [(ngModel)]="loginData.password" name="password" required />
         <label for="password">Password</label>
       </p-floatLabel>
     </div>
 
-    <p-button label="Submit" class="form-button" />
+    <p-button label="Login" class="form-button" type="submit"></p-button>
   </form>
 </fieldset>

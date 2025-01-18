@@ -1,0 +1,11 @@
+{
+  "Bus": {
+    "Name": "Bus Name",
+    "Capacity": "Capacity",
+    "Color": "Color",
+    "Weight": "Weight (kg)",
+    "Driver": "Driver",
+    "Submit": "Submit",
+    "Update": "Update"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "Bus": {
+    "Name": "Bus-Name",
+    "Capacity": "Kapazität",
+    "Color": "Farbe",
+    "Weight": "Gewicht (kg)",
+    "Driver": "Fahrer",
+    "Submit": "Einreichen",
+    "Update": "Aktualisieren"
+  }
+}
