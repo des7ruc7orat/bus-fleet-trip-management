@@ -1,4 +1,10 @@
-import { ChangeDetectorRef, Component, effect, inject, signal, WritableSignal } from '@angular/core';
+import {
+  Component,
+  effect,
+  inject,
+  signal,
+  WritableSignal,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FloatLabelModule } from 'primeng/floatlabel';
 import { InputTextModule } from 'primeng/inputtext';
@@ -8,7 +14,7 @@ import { UserService } from '../../../user/api/user.service';
 import { FormsModule } from '@angular/forms';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { DynamicDialogConfig } from 'primeng/dynamicdialog';
-import { TranslateModule, TranslatePipe, TranslateService } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { MessageService } from 'primeng/api';
 import { MessageModule } from 'primeng/message';
 import { ToastModule } from 'primeng/toast';
@@ -24,7 +30,6 @@ import { firstValueFrom } from 'rxjs';
     FormsModule,
     AutoCompleteModule,
     TranslateModule,
-    TranslatePipe,
     MessageModule,
     ToastModule,
   ],
@@ -39,61 +44,79 @@ export class BusFormComponent {
   public filteredDrivers: any[] = [];
   private busService: BusService = inject(BusService);
   private userService: UserService = inject(UserService);
-  private cdr: ChangeDetectorRef = inject(ChangeDetectorRef);
   private messageService: MessageService = inject(MessageService);
   private translateService: TranslateService = inject(TranslateService);
+
   constructor() {
-    effect(async () => {
-      if (this.config.data) {
-        const bus = await this.busService.getBusById(this.config.data.id);
-        this.bus.set(bus);
+    effect(() => {
+      if (this.config?.data?.id) {
+        this.loadBus(this.config.data.id);
       }
     });
   }
 
-  // Fetch drivers based on user input
-  searchDriver(event: any) {
-    const query = event.query;
-
-    this.userService.getUsers(query).subscribe((users) => {
-      this.filteredDrivers = users; // Update the filtered drivers list
-    });
+  private async loadBus(id: string) {
+    try {
+      const bus = await this.busService.getBusById(id);
+      if (bus['driver']) {
+        const driver = await this.userService.getUserById(bus['driver']); // Assuming this method exists
+        bus['driver'] = `${driver.email}`;
+      }
+      this.bus.set(bus);
+    } catch (error) {
+      console.error('Error loading bus:', error);
+    }
   }
 
-  // Handle bus form submission
-  onSubmit() {
-    const currentBus = this.bus();
+  async searchDriver(event: any) {
+    const query = event.query;
 
-    if (!currentBus || !currentBus.name) {
+    try {
+      const users = await this.userService.getUsers();
+      this.filteredDrivers = users
+        .filter(user => user.role === 'driver')
+        .map(user => ({
+          ...user,
+          fullName: `${user.email}`, // Add fullName for display
+        }));
+    } catch (err) {
+      console.error('Error fetching drivers:', err);
+    }
+  }
+
+  async onSubmit() {
+    const currentBus = this.bus();
+    if (!currentBus?.name) {
       console.error('No data provided for the bus or missing required fields');
       return;
     }
 
-    this.busService
-      .createBus(currentBus)
-      .then((newBus) => {
-        console.log('Bus created successfully:', newBus);
-      })
-      .catch((error: any) => {
-        console.error('Error creating bus:', error);
-      });
-  }
-  public async onUpdate(): Promise<void> {
     try {
-      const updatedBus = this.bus(); // Get the actual bus data from the signal
-      if (!updatedBus || !updatedBus.name) {
-        console.error(
-          'No data provided for the bus or missing required fields'
-        );
-        return;
-      }
+      const newBus = await this.busService.createBus(currentBus);
+      console.log('Bus created successfully:', newBus);
+    } catch (error) {
+      console.error('Error creating bus:', error);
+    }
+  }
 
-      await this.busService.updateBus(this.config.data.id, updatedBus); // Pass the resolved data
-      const myBookingTitle = await firstValueFrom(this.translateService.get('Bus.Name'));
+  async onUpdate() {
+    const updatedBus = this.bus();
+    if (!updatedBus?.name) {
+      console.error('No data provided for the bus or missing required fields');
+      return;
+    }
+
+    try {
+      const drivers =  await this.userService.getUsers();
+      const driver = drivers.find(driver => driver.email === updatedBus.driver);
+      updatedBus.driver = driver._id;
+      await this.busService.updateBus(this.config.data.id, updatedBus);
+      updatedBus.driver = driver.email;
+      const message = await firstValueFrom(this.translateService.get('Bus.Name'));
       this.messageService.add({
         severity: 'warn',
-        summary: 'message summary',
-        detail: myBookingTitle,
+        summary: 'Update Successful',
+        detail: message,
       });
     } catch (error) {
       console.error('Error updating bus:', error);

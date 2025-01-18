@@ -7,6 +7,7 @@ import { Button } from 'primeng/button';
 import { AuthService } from '../api/auth.service';
 import { Router } from '@angular/router';
 import { menuHeaderItem } from '../../../menu/items/menu-header.item';
+import { TranslatePipe } from '@ngx-translate/core';
 @Component({
   selector: 'app-login',
   imports: [
@@ -15,6 +16,7 @@ import { menuHeaderItem } from '../../../menu/items/menu-header.item';
     FormsModule,
     InputTextModule,
     Button,
+    TranslatePipe,
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
@@ -25,12 +27,12 @@ export class LoginComponent {
   private authService: AuthService = inject(AuthService);
   private router: Router = inject(Router);
 
-  private  menuHeaderItem = signal(menuHeaderItem);
+  private menuHeaderItem = signal(menuHeaderItem);
   async onSubmit() {
     try {
       const response = await this.authService.login(this.loginData);
       this.authService.storeToken(response.access_token);
-      this.updateMenuItemsVisibility()
+      // this.updateMenuItemsVisibility();
       await this.router.navigate(['/bus-list']); // Redirect after login
     } catch (error) {
       console.error('Login failed', error);
@@ -39,12 +41,12 @@ export class LoginComponent {
   }
 
   updateMenuItemsVisibility(): void {
-    this.menuHeaderItem.update(items =>
-      items.map(item => {
-        if (item.label === 'Login') {
+    this.menuHeaderItem.update((items) =>
+      items.map((item) => {
+        if (item.label === 'Auth.Login') {
           item.visible = false;
         }
-          item.visible = item.label !== 'Login';
+        item.visible = item.label !== 'Auth.Login';
 
         return item;
       })

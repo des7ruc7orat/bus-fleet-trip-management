@@ -1,12 +1,12 @@
 export const menuHeaderItem = [
   {
-    label: 'Login',
+    label: 'Auth.Login',  // Translation key
     icon: 'fas fa-sign-in-alt',
     routerLink: '/login',
     visible: true,  // Initially visible
   },
   {
-    label: 'Bus',
+    label: 'Bus.Name',  // Translation key
     icon: 'fas fa-bus',
     visible: false,  // Initially visible
     items: [
@@ -14,12 +14,12 @@ export const menuHeaderItem = [
         {
           items: [
             {
-              label: 'List',
+              label: 'List',  // Translation key
               icon: 'fas fa-bus-list',
               routerLink: 'bus-list',
             },
             {
-              label: 'Form',
+              label: 'Form',  // Translation key
               icon: 'fas fa-file-alt',
               routerLink: ['bus-form'],
             },
@@ -29,7 +29,7 @@ export const menuHeaderItem = [
     ],
   },
   {
-    label: 'Fleet',
+    label: 'Fleet.Name',  // Translation key
     icon: 'fas fa-warehouse',
     visible: false,
     items: [
@@ -37,12 +37,12 @@ export const menuHeaderItem = [
         {
           items: [
             {
-              label: 'List',
+              label: 'List',  // Translation key
               icon: 'fas fa-bus-list',
               routerLink: 'fleet-list',
             },
             {
-              label: 'Form',
+              label: 'Form',  // Translation key
               icon: 'fas fa-file-alt',
               routerLink: ['fleet-form'],
             },
@@ -52,7 +52,7 @@ export const menuHeaderItem = [
     ],
   },
   {
-    label: 'Trip',
+    label: 'Trip.Name',  // Translation key
     icon: 'fas fa-route',
     visible: false,
     items: [
@@ -60,12 +60,12 @@ export const menuHeaderItem = [
         {
           items: [
             {
-              label: 'List',
+              label: 'List',  // Translation key
               icon: 'fas fa-bus-list',
               routerLink: 'trip-list',
             },
             {
-              label: 'Form',
+              label: 'Form',  // Translation key
               icon: 'fas fa-file-alt',
               routerLink: ['trip-form'],
             },
@@ -75,7 +75,7 @@ export const menuHeaderItem = [
     ],
   },
   {
-    label: 'Logout',
+    label: 'Auth.Logout',  // Translation key
     icon: 'fas fa-arrow-right-from-bracket',
     visible: false,
   },

@@ -1,0 +1,99 @@
+<fieldset>
+  <form class="form-container" (ngSubmit)="onSubmit()">
+    <div class="form-row">
+      <p-floatLabel class="form-group">
+        <input
+          id="fleet-name"
+          type="text"
+          pInputText
+          [(ngModel)]="fleet().name"
+          name="name"
+        />
+        <label for="fleet-name">{{ 'Fleet.Form.Name' | translate }}</label>
+      </p-floatLabel>
+
+      <p-floatLabel class="form-group">
+        <input
+          id="fleet-capacity"
+          type="number"
+          pInputText
+          [(ngModel)]="fleet().capacity"
+          name="capacity"
+        />
+        <label for="fleet-capacity">{{ 'Fleet.Form.Capacity' | translate }}</label>
+      </p-floatLabel>
+    </div>
+
+    <!-- Address Section -->
+    <p-tabView>
+      <p-tabPanel header="Address">
+        <div class="form-row">
+          <p-floatLabel class="form-group">
+            <input
+              id="address-name"
+              type="text"
+              pInputText
+              [(ngModel)]="address().name"
+              name="addressName"
+            />
+            <label for="address-name">{{ 'Address.Form.Name' | translate }}</label>
+          </p-floatLabel>
+
+          <p-floatLabel class="form-group">
+            <input
+              id="address-city"
+              type="text"
+              pInputText
+              [(ngModel)]="address().city"
+              name="addressCity"
+            />
+            <label for="address-city">{{ 'Address.Form.City' | translate }}</label>
+          </p-floatLabel>
+        </div>
+
+        <div class="form-row">
+          <p-floatLabel class="form-group">
+            <input
+              id="address-postCode"
+              type="text"
+              pInputText
+              [(ngModel)]="address().postCode"
+              name="addressPostCode"
+            />
+            <label for="address-postCode">{{ 'Address.Form.PostCode' | translate }}</label>
+          </p-floatLabel>
+
+          <p-floatLabel class="form-group">
+            <input
+              id="address-street"
+              type="text"
+              pInputText
+              [(ngModel)]="address().street"
+              name="addressStreet"
+            />
+            <label for="address-street">{{ 'Address.Form.Street' | translate }}</label>
+          </p-floatLabel>
+        </div>
+
+        <div class="form-row">
+          <p-floatLabel class="form-group">
+            <input
+              id="address-streetNumber"
+              type="text"
+              pInputText
+              [(ngModel)]="address().streetNumber"
+              name="addressStreetNumber"
+            />
+            <label for="address-streetNumber">{{ 'Address.Form.StreetNumber' | translate }}</label>
+          </p-floatLabel>
+        </div>
+      </p-tabPanel>
+    </p-tabView>
+    <!-- Submit or Update Button -->
+    @if (!config?.data) {
+      <p-button label="{{ 'Submit' | translate }}" class="form-button" type="submit"></p-button>
+    } @else {
+      <p-button label="{{ 'Update' | translate }}" class="form-button" (click)="onUpdate()"></p-button>
+    }
+  </form>
+</fieldset>

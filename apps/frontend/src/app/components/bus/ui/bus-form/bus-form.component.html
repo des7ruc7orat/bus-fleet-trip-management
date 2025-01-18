@@ -10,7 +10,7 @@
           [(ngModel)]="bus().name"
           name="name"
         />
-        <label for="bus-name">{{ 'Bus.Name' | translate }}</label>
+        <label for="bus-name">{{ 'Bus.Form.Name' | translate }}</label>
       </p-floatLabel>
 
       <p-floatLabel class="form-group">
@@ -19,9 +19,9 @@
           type="number"
           pInputText
           [(ngModel)]="bus().capacity"
-          name="busCapacity"
+          name="capacity"
         />
-        <label for="bus-capacity">Capacity</label>
+        <label for="bus-capacity">{{ 'Bus.Form.Capacity' | translate }}</label>
       </p-floatLabel>
     </div>
 
@@ -32,9 +32,9 @@
           type="text"
           pInputText
           [(ngModel)]="bus().color"
-          name="busColor"
+          name="color"
         />
-        <label for="bus-color">Color</label>
+        <label for="bus-color">{{ 'Bus.Form.Color' | translate }}</label>
       </p-floatLabel>
 
       <p-floatLabel class="form-group">
@@ -43,13 +43,12 @@
           type="number"
           pInputText
           [(ngModel)]="bus().kg"
-          name="busKg"
+          name="kg"
         />
-        <label for="bus-kg">Weight (kg)</label>
+        <label for="bus-kg">{{ 'Bus.Form.Weight' | translate }}</label>
       </p-floatLabel>
     </div>
 
-    <!-- Autocomplete for selecting driver -->
     <div class="form-row">
       <p-floatLabel class="form-group">
         <p-autoComplete
@@ -57,20 +56,18 @@
           [(ngModel)]="bus().driver"
           [suggestions]="filteredDrivers"
           (completeMethod)="searchDriver($event)"
-          optionLabel="name"
-          [minLength]="3"
-          [size]="5"
-          placeholder="Select Driver"
-          name="busDriver"
+          optionLabel="fullName" [minLength]="3"
+          placeholder="{{ 'Bus.Form.Driver' | translate }}"
+          name="driver"
         ></p-autoComplete>
-        <label for="bus-driver">Driver</label>
+        <label for="bus-driver">{{ 'Bus.Form.Driver' | translate }}</label>
       </p-floatLabel>
     </div>
 
-    @if (!config.data) {
-      <p-button  label="Submit" class="form-button" type="submit"></p-button>
+    @if (!config?.data) {
+      <p-button label="{{ 'Submit' | translate }}" class="form-button" type="submit"></p-button>
     } @else {
-      <p-button (click)="onUpdate()" label="Update" class="form-button" ></p-button>
+      <p-button label="{{ 'Update' | translate }}" class="form-button" (click)="onUpdate()"></p-button>
     }
   </form>
 </fieldset>

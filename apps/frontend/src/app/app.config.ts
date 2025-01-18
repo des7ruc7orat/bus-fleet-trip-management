@@ -18,13 +18,9 @@ import {
   DynamicDialogConfig,
   DynamicDialogModule,
 } from 'primeng/dynamicdialog';
-import { provideTranslateService, TranslateLoader, TranslateModule } from '@ngx-translate/core';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { HttpLoaderFactory } from '../translation-loader';
 
-// const supportedLanguages = ['en', 'de'];
-
-const httpLoaderFactory: (http: HttpClient) => TranslateHttpLoader = (http: HttpClient) =>
-  new TranslateHttpLoader(http, './i18n/', '.json');
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -35,38 +31,15 @@ export const appConfig: ApplicationConfig = {
     provideAnimationsAsync(),
     importProvidersFrom(
       DynamicDialogModule,
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: httpLoaderFactory,
-        deps: [HttpClient]
-      }
-    })
+      TranslateModule.forRoot({
+        loader: {
+          provide: TranslateLoader,
+          useFactory: HttpLoaderFactory,
+          deps: [HttpClient],
+        },
+      })
     ),
     DialogService,
     { provide: DynamicDialogConfig, useValue: {} },
-    provideTranslateService({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: httpLoaderFactory,
-        deps: [HttpClient],
-      },
-    }),
-    // {
-    //   provide: 'APP_INITIALIZER',
-    //   useFactory: (translate: TranslateService) => async () => {
-    //     const defaultLang = 'en';
-    //     try {
-    //       await firstValueFrom(translate.use(defaultLang)); // Try loading the default language
-    //     } catch (error) {
-    //       console.error('Error loading translations, falling back to default language:', error);
-    //     }
-    //   },
-    //   deps: [TranslateService],
-    //   multi: true,
-    // },
-    provideTranslateService({
-      defaultLanguage: 'en',
-    }),
   ],
 };

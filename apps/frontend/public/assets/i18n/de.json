@@ -1,0 +1,51 @@
+{
+  "Form": "Formular",
+  "List": "Liste",
+  "Bus": {
+    "Name": "Bus",
+    "Form": {
+      "Name": "Bus Name",
+      "Capacity": "Kapazität",
+      "Color": "Farbe",
+      "Weight": "Gewicht (kg)",
+      "Driver": "Fahrer",
+      "Submit": "Absenden",
+      "Update": "Aktualisieren"
+    }
+  },
+  "Fleet": {
+    "Name": "Fahrzeugflotte",
+    "Form": {
+      "Name": "Flottenname",
+      "Capacity": "Kapazität",
+      "Address": "Adresse",
+      "Buses": "Busse",
+      "Submit": "Absenden",
+      "Update": "Aktualisieren"
+    }
+  },
+  "Address": {
+    "Name": "Name",
+    "City": "Stadt",
+    "PostCode": "Postleitzahl",
+    "Street": "Straße",
+    "StreetNumber": "Hausnummer"
+  },
+  "Trip": {
+    "Bus": "Bus",
+    "BeginningPoint": "Startpunkt",
+    "EndingPoint": "Zielpunkt",
+    "StartingTime": "Startzeit",
+    "ArrivingTime": "Ankunftszeit",
+    "Form": {
+      "Submit": "Absenden",
+      "Update": "Aktualisieren"
+    }
+  },
+  "Auth": {
+    "Email": "E-Mail",
+    "Password": "Passwort",
+    "Login": "Einloggen",
+    "Logout": "Ausloggen"
+  }
+}

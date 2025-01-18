@@ -3,12 +3,12 @@
     <div class="form-row">
       <p-floatLabel class="form-group">
         <input id="email" type="text" pInputText [(ngModel)]="loginData.email" name="email" required />
-        <label for="email">Email</label>
+        <label for="email">{{ 'Auth.Email' | translate }}</label>
       </p-floatLabel>
 
       <p-floatLabel class="form-group">
         <input id="password" type="password" pInputText [(ngModel)]="loginData.password" name="password" required />
-        <label for="password">Password</label>
+        <label for="password">{{ 'Auth.Password' | translate }}</label>
       </p-floatLabel>
     </div>
 

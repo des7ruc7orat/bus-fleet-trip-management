@@ -2,14 +2,13 @@ import { IsString, IsOptional, IsNumber } from 'class-validator';
 
 export class CreateFleetDto {
   @IsNumber()
-  capacity: number;
+  capacity!: number;
 
   @IsString()
-  name: string;  // Add 'name' field to the DTO
+  name!: string;  // Add 'name' field to the DTO
 
   @IsString()
-  @IsOptional()
-  address?: string;  // Address is optional
+  address!: string;  // Address is optional
 
   @IsOptional()
   buses?: string[];  // Optional array of buses

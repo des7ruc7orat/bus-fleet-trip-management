@@ -14,10 +14,6 @@ export class CreateUserDto {
   email!: string;
 
   @IsString()
-  @Matches(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*?&]{8,}$/, {
-    message:
-      'Password must contain at least 8 characters, including at least one letter and one number.',
-  })
   password!: string;
 
   @IsString()
@@ -34,7 +30,7 @@ export class CreateUserDto {
   address?: string;
 
   @IsEnum(Role, { message: 'Invalid role' })
-  role!: Role; // Use a string for now, but this should ideally be replaced with a Role enum
+  role!: Role;
 
   @IsString()
   username!: string;

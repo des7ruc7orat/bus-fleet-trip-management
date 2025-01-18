@@ -1,0 +1,54 @@
+{
+  "Form": "Form",
+  "List": "List",
+  "Bus": {
+    "Name": "Bus",
+    "Form" : {
+      "Name": "Bus Name",
+      "Capacity": "Capacity",
+      "Color": "Color",
+      "Weight": "Weight (kg)",
+      "Driver": "Driver",
+      "Submit": "Submit",
+      "Update": "Update"
+    }
+  },
+  "Fleet": {
+    "Name": "Fleet",
+    "Form": {
+      "Name": "Fleet Name",
+      "Capacity": "Capacity",
+      "Address": "Address",
+      "Buses": "Buses",
+      "Submit": "Submit",
+      "Update": "Update"
+    }
+  },
+  "Address": {
+    "Form": {
+    "Name": "Name",
+    "City": "City",
+    "PostCode": "Postal Code",
+    "Street": "Street",
+    "StreetNumber": "Street Number"
+    }
+  },
+  "Trip": {
+    "Name": "Trip",
+    "Bus": "Bus",
+    "BeginningPoint": "Beginning Point",
+    "EndingPoint": "Ending Point",
+    "StartingTime": "Starting Time",
+    "ArrivingTime": "Arriving Time",
+    "Form": {
+      "Submit": "Submit",
+      "Update": "Update"
+    }
+  },
+  "Auth": {
+    "Email": "Email",
+    "Password": "Password",
+    "Login": "Login",
+    "Logout": "Logout"
+  }
+}
