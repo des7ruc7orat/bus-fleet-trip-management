@@ -6,6 +6,8 @@ import * as mongoose from 'mongoose';
 
 @Schema()
 export class Trip extends Document {
+  @Prop()
+  name: string;
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Bus' })
   bus: Bus;
 

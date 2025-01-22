@@ -3,7 +3,7 @@
   "List": "List",
   "Bus": {
     "Name": "Bus",
-    "Form" : {
+    "Form": {
       "Name": "Bus Name",
       "Capacity": "Capacity",
       "Color": "Color",
@@ -11,6 +11,9 @@
       "Driver": "Driver",
       "Submit": "Submit",
       "Update": "Update"
+    },
+    "Messages": {
+      "No": "No buses available."
     }
   },
   "Fleet": {
@@ -22,27 +25,34 @@
       "Buses": "Buses",
       "Submit": "Submit",
       "Update": "Update"
+    },
+    "Messages": {
+      "No": "No fleets available."
     }
   },
   "Address": {
     "Form": {
-    "Name": "Name",
-    "City": "City",
-    "PostCode": "Postal Code",
-    "Street": "Street",
-    "StreetNumber": "Street Number"
+      "Name": "Name",
+      "City": "City",
+      "PostCode": "Postal Code",
+      "Street": "Street",
+      "StreetNumber": "Street Number"
     }
   },
   "Trip": {
     "Name": "Trip",
-    "Bus": "Bus",
-    "BeginningPoint": "Beginning Point",
-    "EndingPoint": "Ending Point",
-    "StartingTime": "Starting Time",
-    "ArrivingTime": "Arriving Time",
     "Form": {
+      "Name": "Trip name",
+      "Bus": "Bus",
+      "BeginningPoint": "Beginning Point",
+      "EndingPoint": "Ending Point",
+      "StartingTime": "Starting Time",
+      "ArrivingTime": "Arriving Time",
       "Submit": "Submit",
       "Update": "Update"
+    },
+    "Messages": {
+      "No": "No trips available."
     }
   },
   "Auth": {
@@ -50,5 +60,24 @@
     "Password": "Password",
     "Login": "Login",
     "Logout": "Logout"
+  },
+  "Messages": {
+    "Success": {
+      "Create": "You have successfully create the {{entity}}.",
+      "CreateSuccessful": "Create Successful",
+      "Update": "You have successfully update the {{entity}}.",
+      "UpdateSuccessful": "Update Successful",
+      "Delete": "You have successfully delete the {{entity}}",
+      "DeleteSuccessful": "Delete Successful",
+      "Login": "Hello {{email}}",
+      "LoginSuccess": "Login successfully",
+      "Logout": "You have logged out",
+      "LogoutSuccess": "Logout successfully"
+    },
+    "Error": {
+      "Error": "There is a error.",
+      "Login": "Invalid username or password",
+      "LoginError": "Login not successfully"
+    }
   }
 }

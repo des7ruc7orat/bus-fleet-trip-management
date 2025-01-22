@@ -3,6 +3,9 @@ import { IsNotEmpty, IsString, IsDateString } from 'class-validator';
 export class CreateTripDto {
   @IsString()
   @IsNotEmpty()
+  name: string; // Expecting a string ID for the bus reference
+  @IsString()
+  @IsNotEmpty()
   bus: string; // Expecting a string ID for the bus reference
 
   @IsString()

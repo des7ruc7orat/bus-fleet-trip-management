@@ -1,0 +1,200 @@
+<p-toast></p-toast>
+<fieldset>
+  <div class="header-container">
+    <div class="spacer"></div>
+    <div class="save-delete-button-container">
+      <p-button icon="fa-solid fa-floppy-disk"
+                [rounded]="true" severity="success" class="form-button" (click)="onSubmit()"></p-button>
+    </div>
+    <div class="save-delete-button-container">
+      @if (tripId) {
+        <p-button
+          (onClick)="onDelete()"
+          icon="fa-solid fa-trash"
+          severity="danger"
+          [rounded]="true"
+          aria-label="Delete"
+        ></p-button>
+      }
+    </div>
+  </div>
+  <form class="form-container">
+    <div class="form-row">
+      <p-floatLabel class="form-group">
+        <input
+          id="bus-name"
+          type="text"
+          pInputText
+          [required]="true"
+          [(ngModel)]="trip().name"
+          name="name"
+        />
+        <label for="bus-name">{{ 'Trip.Form.Name' | translate }}</label>
+      </p-floatLabel>
+      <p-floatLabel class="form-group">
+        <p-autoComplete
+          id="bus-driver"
+          [(ngModel)]="trip().bus"
+          [suggestions]="filteredBuses"
+          (completeMethod)="searchBus()"
+          optionLabel="fullName" [minLength]="3"
+          placeholder="{{ 'Bus.Form.Driver' | translate }}"
+          name="driver"
+        ></p-autoComplete>
+        <label for="bus-driver">{{ 'Bus.Form.Driver' | translate }}</label>
+      </p-floatLabel>
+    </div>
+    <div class="form-row">
+      <p-floatLabel class="form-group">
+        <input
+          id="trip-starting-time"
+          type="datetime-local"
+          pInputText
+          [(ngModel)]="trip().startingTime"
+          name="startingTime"
+        />
+        <label for="trip-starting-time">{{ 'Trip.Form.StartingTime' | translate }}</label>
+      </p-floatLabel>
+
+      <p-floatLabel class="form-group">
+        <input
+          id="trip-arriving-time"
+          type="datetime-local"
+          pInputText
+          [(ngModel)]="trip().arrivingTime"
+          name="arrivingTime"
+        />
+        <label for="trip-arriving-time">{{ 'Trip.Form.ArrivingTime' | translate }}</label>
+      </p-floatLabel>
+    </div>
+
+    <!-- Address Section -->
+    <p-tabView>
+      <p-tabPanel header="{{ 'Trip.Form.BeginningPoint' | translate }}">
+        <div class="form-row">
+          <p-floatLabel class="form-group">
+            <input
+              id="address-name"
+              type="text"
+              pInputText
+              [(ngModel)]="beginningPoint().name"
+              name="addressName"
+            />
+            <label for="address-name">{{ 'Address.Form.Name' | translate }}</label>
+          </p-floatLabel>
+
+          <p-floatLabel class="form-group">
+            <input
+              id="address-city"
+              type="text"
+              pInputText
+              [(ngModel)]="beginningPoint().city"
+              name="addressCity"
+            />
+            <label for="address-city">{{ 'Address.Form.City' | translate }}</label>
+          </p-floatLabel>
+        </div>
+
+        <div class="form-row">
+          <p-floatLabel class="form-group">
+            <input
+              id="address-postCode"
+              type="text"
+              pInputText
+              [(ngModel)]="beginningPoint().postCode"
+              name="addressPostCode"
+            />
+            <label for="address-postCode">{{ 'Address.Form.PostCode' | translate }}</label>
+          </p-floatLabel>
+
+          <p-floatLabel class="form-group">
+            <input
+              id="address-street"
+              type="text"
+              pInputText
+              [(ngModel)]="beginningPoint().street"
+              name="addressStreet"
+            />
+            <label for="address-street">{{ 'Address.Form.Street' | translate }}</label>
+          </p-floatLabel>
+        </div>
+
+        <div class="form-row">
+          <p-floatLabel class="form-group">
+            <input
+              id="address-streetNumber"
+              type="text"
+              pInputText
+              [(ngModel)]="beginningPoint().streetNumber"
+              name="addressStreetNumber"
+            />
+            <label for="address-streetNumber">{{ 'Address.Form.StreetNumber' | translate }}</label>
+          </p-floatLabel>
+        </div>
+      </p-tabPanel>
+
+      <p-tabPanel header="{{ 'Trip.Form.EndingPoint' | translate }}">
+        <div class="form-row">
+          <p-floatLabel class="form-group">
+            <input
+              id="address-two-name"
+              type="text"
+              pInputText
+              [(ngModel)]="endingPoint().name"
+              name="addressName"
+            />
+            <label for="address-two-name">{{ 'Address.Form.Name' | translate }}</label>
+          </p-floatLabel>
+
+          <p-floatLabel class="form-group">
+            <input
+              id="address-two-city"
+              type="text"
+              pInputText
+              [(ngModel)]="endingPoint().city"
+              name="addressCity"
+            />
+            <label for="address-two-city">{{ 'Address.Form.City' | translate }}</label>
+          </p-floatLabel>
+        </div>
+
+        <div class="form-row">
+          <p-floatLabel class="form-group">
+            <input
+              id="address-two-postCode"
+              type="text"
+              pInputText
+              [(ngModel)]="endingPoint().postCode"
+              name="addressPostCode"
+            />
+            <label for="address-two-postCode">{{ 'Address.Form.PostCode' | translate }}</label>
+          </p-floatLabel>
+
+          <p-floatLabel class="form-group">
+            <input
+              id="address-two-street"
+              type="text"
+              pInputText
+              [(ngModel)]="endingPoint().street"
+              name="addressStreet"
+            />
+            <label for="address-two-street">{{ 'Address.Form.Street' | translate }}</label>
+          </p-floatLabel>
+        </div>
+
+        <div class="form-row">
+          <p-floatLabel class="form-group">
+            <input
+              id="address-two-streetNumber"
+              type="text"
+              pInputText
+              [(ngModel)]="endingPoint().streetNumber"
+              name="addressStreetNumber"
+            />
+            <label for="address-two-streetNumber">{{ 'Address.Form.StreetNumber' | translate }}</label>
+          </p-floatLabel>
+        </div>
+      </p-tabPanel>
+    </p-tabView>
+  </form>
+</fieldset>

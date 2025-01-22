@@ -7,7 +7,10 @@ import { Button } from 'primeng/button';
 import { AuthService } from '../api/auth.service';
 import { Router } from '@angular/router';
 import { menuHeaderItem } from '../../../menu/items/menu-header.item';
-import { TranslatePipe } from '@ngx-translate/core';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
+import { firstValueFrom } from 'rxjs';
+import { MessageService } from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
 @Component({
   selector: 'app-login',
   imports: [
@@ -17,7 +20,9 @@ import { TranslatePipe } from '@ngx-translate/core';
     InputTextModule,
     Button,
     TranslatePipe,
+    ToastModule,
   ],
+  providers: [MessageService],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
 })
@@ -26,30 +31,40 @@ export class LoginComponent {
 
   private authService: AuthService = inject(AuthService);
   private router: Router = inject(Router);
-
+  private messageService: MessageService = inject(MessageService);
+  private translateService: TranslateService = inject(TranslateService);
   private menuHeaderItem = signal(menuHeaderItem);
   async onSubmit() {
     try {
       const response = await this.authService.login(this.loginData);
       this.authService.storeToken(response.access_token);
-      // this.updateMenuItemsVisibility();
-      await this.router.navigate(['/fleet-list']); // Redirect after login
+      const detailMessage = await firstValueFrom(
+        this.translateService.get('Messages.Success.Login', {
+          email: this.loginData.email,
+        })
+      );
+      const message = await firstValueFrom(
+        this.translateService.get('Messages.Success.LoginSuccess')
+      );
+      this.messageService.add({
+        severity: 'success',
+        summary: message,
+        detail: detailMessage,
+      });
+      await this.router.navigate(['/bus-list']); // Redirect after login
     } catch (error) {
       console.error('Login failed', error);
-      alert('Invalid credentials');
+      const detailMessage = await firstValueFrom(
+        this.translateService.get('Messages.Error.Login')
+      );
+      const message = await firstValueFrom(
+        this.translateService.get('Messages.Error.LoginError')
+      );
+      this.messageService.add({
+        severity: 'success',
+        summary: message,
+        detail: detailMessage,
+      });
     }
-  }
-
-  updateMenuItemsVisibility(): void {
-    this.menuHeaderItem.update((items) =>
-      items.map((item) => {
-        if (item.label === 'Auth.Login') {
-          item.visible = false;
-        }
-        item.visible = item.label !== 'Auth.Login';
-
-        return item;
-      })
-    );
   }
 }

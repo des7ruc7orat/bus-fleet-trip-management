@@ -26,7 +26,7 @@ export class BusController {
 
   // Both admin and driver can view bus by ID
   @Get(':id')
-  @Roles('admin', 'driver') // Both roles can access this endpoint
+  @Roles('admin') // Both roles can access this endpoint
   async findById(@Param('id') id: string): Promise<Bus> {
     return this.busService.findById(id);
   }

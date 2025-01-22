@@ -1,4 +1,6 @@
-export const menuHeaderItem = [
+import { MegaMenuItem } from 'primeng/api';
+
+export const menuHeaderItem: MegaMenuItem[] = [
   {
     label: 'Login',  // Translation key
     icon: 'fas fa-sign-in-alt',
@@ -26,7 +28,7 @@ export const menuHeaderItem = [
           ],
         },
       ],
-    ],
+    ],  // Correct structure, array of arrays
   },
   {
     label: 'Fleet',  // Translation key
@@ -49,7 +51,7 @@ export const menuHeaderItem = [
           ],
         },
       ],
-    ],
+    ],  // Correct structure
   },
   {
     label: 'Trip',  // Translation key
@@ -72,11 +74,12 @@ export const menuHeaderItem = [
           ],
         },
       ],
-    ],
+    ],  // Correct structure
   },
   {
     label: 'Logout',  // Translation key
     icon: 'fas fa-arrow-right-from-bracket',
     visible: false,
-  },
+    command: undefined,
+  }
 ];

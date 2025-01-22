@@ -1,0 +1,95 @@
+@if (!fleetId) {
+  <h1>Trip List</h1>
+}
+<div class="card">
+  <p-table
+    #dt2
+    [value]="trips()"
+    dataKey="id"
+    [rows]="10"
+    [rowsPerPageOptions]="[10, 25, 50]"
+    [paginator]="true"
+    [globalFilterFields]="['name', 'driver', 'arrivingPoint', 'endPoint']"
+    [tableStyle]="{ 'min-width': '75rem' }"
+  >
+    <ng-template pTemplate="caption">
+      <div class="flex">
+        <p-button (click)="openDialog()" icon="fas fa-plus" styleClass="p-button-rounded"></p-button>
+      </div>
+    </ng-template>
+
+    <ng-template pTemplate="header">
+      <tr>
+        <th style="width:22%">Name</th>
+        <th style="width:22%">Bus</th>
+        <th style="width:22%">Starting Point</th>
+        <th style="width:22%">End Point</th>
+        <th style="width:22%">Starting Time</th>
+        <th style="width:22%">Arriving Time</th>
+
+      </tr>
+      <tr>
+        <th>
+          <p-columnFilter
+            type="text"
+            field="name"
+            placeholder="Search by name"
+            ariaLabel="Filter Name" />
+        </th>
+        <th>
+          <p-columnFilter
+            type="text"
+            field="bus"
+            placeholder="Search by bus"
+            ariaLabel="Filter Bus" />
+        </th>
+          <th>
+            <p-columnFilter
+              type="text"
+              field="arrivingPoint"
+              placeholder="Search by start point"
+              ariaLabel="Filter Arriving Point" />
+          </th>
+        <th>
+          <p-columnFilter
+            type="text"
+            field="endPoint"
+            placeholder="Search by end point"
+            ariaLabel="Filter End Point" />
+        </th>
+        <th>
+          <p-columnFilter
+            type="text"
+            field="startingTime"
+            placeholder="Search by starting time"
+            ariaLabel="Filter Starting Time" />
+        </th>
+        <th>
+          <p-columnFilter
+            type="text"
+            field="arrivingTime"
+            placeholder="Search by arriving time"
+            ariaLabel="Filter Arriving Time" />
+        </th>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-trip>
+      <tr (click)="openDialog(trip)">
+        <td>{{ trip.name }}</td>
+        <td><p-tag [value]="trip.bus"></p-tag></td>
+          <td><p-tag [value]="trip.beginningPoint"></p-tag></td>
+        <td><p-tag [value]="trip.endingPoint"></p-tag></td>
+        <td><p-tag [value]="trip.startingTime"></p-tag></td>
+        <td><p-tag [value]="trip.arrivingTime"></p-tag></td>
+
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="emptymessage">
+      <tr>
+        <td colspan="3">{{ 'Trip.Messages.No' | translate }}</td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

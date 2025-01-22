@@ -1,20 +1,21 @@
+<p-toast></p-toast>
 <fieldset>
   <div class="header-container">
     <div class="spacer"></div>
     <div class="save-delete-button-container">
-      <p-button icon="fa-solid fa-floppy-disk"
-                [rounded]="true" severity="success" class="form-button" (click)="onSubmit()"></p-button>
+        <p-button icon="fa-solid fa-floppy-disk"
+                  [rounded]="true" severity="success" class="form-button" (click)="onSubmit()"></p-button>
     </div>
     <div class="save-delete-button-container">
       @if (fleetId) {
 
-        <p-button
-          (onClick)="onDelete()"
-          icon="fa-solid fa-trash"
-          severity="danger"
-          [rounded]="true"
-          aria-label="Delete"
-        ></p-button>
+      <p-button
+        (onClick)="onDelete()"
+        icon="fa-solid fa-trash"
+        severity="danger"
+        [rounded]="true"
+        aria-label="Delete"
+      ></p-button>
       }
     </div>
   </div>

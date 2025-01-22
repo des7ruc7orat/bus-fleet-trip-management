@@ -20,16 +20,19 @@ export class TripController {
 
   // Get all trips - Role-based
   @Get()
-  async findAll(@Req() req: Request): Promise<Trip[]> {
-    const user = req.user; // Get the authenticated user
-    return this.tripService.findAllWithRole(user.role, user._id.toString()); // Pass role and user._id to service
+  @Roles('admin', 'driver') // Both roles can access this endpoint
+  async findAll(): Promise<Trip[]> {
+    // const user = req.user; // Get the authenticated user
+    return this.tripService.findAll(); // Pass role and user._id to service
   }
 
   // Get trip by ID - Role-based
   @Get(':id')
+  @Roles('admin') // Both roles can access this endpoint
   async findById(@Req() req: Request, @Param('id') tripId: string): Promise<Trip> {
-    const user = req.user; // TypeScript knows that req.user has _id and role
-    return this.tripService.findByIdWithRole(user.role, user._id.toString(), tripId); // Pass role and user._id to service
+    //const user = req.user; // TypeScript knows that req.user has _id and role
+    //return this.tripService.findByIdWithRole(user.role, user._id.toString(), tripId); // Pass role and user._id to service
+    return this.tripService.findById(tripId);
   }
 
 

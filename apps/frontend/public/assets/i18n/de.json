@@ -32,14 +32,14 @@
     "StreetNumber": "Hausnummer"
   },
   "Trip": {
-    "Bus": "Bus",
-    "BeginningPoint": "Startpunkt",
-    "EndingPoint": "Zielpunkt",
-    "StartingTime": "Startzeit",
-    "ArrivingTime": "Ankunftszeit",
+    "Name": "Trip",
     "Form": {
-      "Submit": "Absenden",
-      "Update": "Aktualisieren"
+      "Name": "Trip Name",
+      "Bus": "Bus",
+      "BeginningPoint": "Startpunkt",
+      "EndingPoint": "Zielpunkt",
+      "StartingTime": "Startzeit",
+      "ArrivingTime": "Ankunftszeit"
     }
   },
   "Auth": {

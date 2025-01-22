@@ -4,11 +4,14 @@ import { Button } from 'primeng/button';
 import { FormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
 import { FloatLabelModule } from 'primeng/floatlabel';
-import { TranslatePipe } from '@ngx-translate/core';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { TabViewModule } from 'primeng/tabview';
 import { AddressService } from '../../../address/api/address.service';
 import { BusListComponent } from '../../../bus/ui/bus-list/bus-list.component';
-import { ActivatedRoute, Router } from '@angular/router'; // Adjust as needed
+import { ActivatedRoute, Router } from '@angular/router';
+import { firstValueFrom } from 'rxjs';
+import { MessageService } from 'primeng/api';
+import { ToastModule } from 'primeng/toast'; // Adjust as needed
 
 @Component({
   selector: 'app-fleet-form',
@@ -22,6 +25,7 @@ import { ActivatedRoute, Router } from '@angular/router'; // Adjust as needed
     TranslatePipe,
     TabViewModule,
     BusListComponent,
+    ToastModule,
   ],
 })
 export class FleetFormComponent {
@@ -32,18 +36,9 @@ export class FleetFormComponent {
   private addressService: AddressService = inject(AddressService);
   private route: ActivatedRoute = inject(ActivatedRoute);
   private router: Router = inject(Router);
-
+  private messageService: MessageService = inject(MessageService);
+  private translateService: TranslateService = inject(TranslateService);
   constructor() {
-    // if (this.config?.data?.id) {
-    //   this.dialogRef = inject(DynamicDialogRef);
-    //   this.dialogRef.onClose.subscribe(() => this.closeEvent.next());
-    // }
-    // effect(async () => {
-    //   if (this.config?.data?.id) {
-    //     this.fleetId = this.config.data?.id;
-    //     await this.loadAddress(this.config.data.id);
-    //   }
-    // });
     this.route.paramMap.subscribe(async (params) => {
       this.fleetId = params.get('id')!; // Extract the 'id' parameter
       if (this.fleetId) {
@@ -58,6 +53,19 @@ export class FleetFormComponent {
     await this.fleetService.deleteFleet(this.fleet()._id);
     await this.addressService.deleteAddress(this.address()._id);
     await this.router.navigate(['/fleet-list']);
+    const detailMessage = await firstValueFrom(
+      this.translateService.get('Messages.Success.Delete', {
+        entity: `${this.fleet().name}`,
+      })
+    );
+    const successMessage = await firstValueFrom(
+      this.translateService.get('Messages.Success.DeleteSuccessful')
+    );
+    this.messageService.add({
+      severity: 'success',
+      summary: successMessage,
+      detail: detailMessage,
+    });
   }
 
   public async onSubmit() {
@@ -86,6 +94,19 @@ export class FleetFormComponent {
         currentFleet.address = newAddress._id;
         const createdFleet = await this.fleetService.createFleet(currentFleet);
         await this.router.navigate(['/fleet-form', createdFleet['_id']]);
+        const detailMessage = await firstValueFrom(
+          this.translateService.get('Messages.Success.Create', {
+            entity: `${createdFleet.name}`,
+          })
+        );
+        const successMessage = await firstValueFrom(
+          this.translateService.get('Messages.Success.CreateSuccessful')
+        );
+        this.messageService.add({
+          severity: 'success',
+          summary: successMessage,
+          detail: detailMessage,
+        });
       }
     } catch (error) {
       console.error('Error creating fleet:', error);
@@ -111,11 +132,27 @@ export class FleetFormComponent {
     }
 
     try {
-      await this.fleetService.updateFleet(this.fleetId, updatedFleet);
+      const updatedTrip = await this.fleetService.updateFleet(
+        this.fleetId,
+        updatedFleet
+      );
       await this.addressService.updateAddress(
         updatedFleet.address,
         updatedAddress
       );
+      const detailMessage = await firstValueFrom(
+        this.translateService.get('Messages.Success.Update', {
+          entity: `${updatedTrip.name}`,
+        })
+      );
+      const successMessage = await firstValueFrom(
+        this.translateService.get('Messages.Success.UpdateSuccessful')
+      );
+      this.messageService.add({
+        severity: 'success',
+        summary: successMessage,
+        detail: detailMessage,
+      });
     } catch (error) {
       console.error('Error updating fleet:', error);
     }

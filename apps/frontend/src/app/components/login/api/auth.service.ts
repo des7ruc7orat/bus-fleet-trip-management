@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, signal, WritableSignal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { jwtDecode } from 'jwt-decode';
 
@@ -9,8 +9,14 @@ export class AuthService {
   private apiUrl = 'http://localhost:3000/api/auth';
 
   constructor(private http: HttpClient) {}
+  private _isLoggedIn: WritableSignal<boolean> = signal(this.isTokenValid());
 
+  // Getter to access the login state signal
+  public get isLoggedIn(): WritableSignal<boolean> {
+    return this._isLoggedIn;
+  }
   login(loginData: { email: string; password: string }): Promise<any> {
+    this._isLoggedIn.set(true);  // Update login status signal
     return this.http.post(`${this.apiUrl}/login`, loginData).toPromise();
   }
 
@@ -23,6 +29,7 @@ export class AuthService {
   }
 
   logout(): void {
+    this._isLoggedIn.set(false); // Update login status signal
     localStorage.removeItem('jwtToken');
   }
   isTokenValid(): boolean {

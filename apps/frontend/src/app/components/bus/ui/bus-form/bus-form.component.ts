@@ -14,6 +14,7 @@ import { MessageModule } from 'primeng/message';
 import { ToastModule } from 'primeng/toast';
 import { FleetService } from '../../../fleet/api/fleet.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-bus-form',
@@ -58,7 +59,7 @@ export class BusFormComponent {
     });
   }
 
-  async searchDriver() {
+  public async searchDriver() {
     try {
       const users = await this.userService.getUsers();
       this.filteredDrivers = users
@@ -104,7 +105,17 @@ export class BusFormComponent {
         // Create a new bus
         const createdBus = await this.busService.createBus(currentBus);
         await this.router.navigate(['/bus-form', createdBus['_id']]);
-        // Navigate to form with the created ID to enable updates
+        const detailMessage = await firstValueFrom(
+          this.translateService.get('Messages.Success.Create', {entity: `${createdBus.name}`}),
+        );
+        const successMessage = await firstValueFrom(
+          this.translateService.get('Messages.Success.CreateSuccessful'),
+        );
+        this.messageService.add({
+          severity: 'success',
+          summary: successMessage,
+          detail: detailMessage,
+        });
       }
     } catch (error) {
       console.error('Error creating or updating bus:', error);
@@ -122,6 +133,17 @@ export class BusFormComponent {
       await this.fleetService.updateFleet(fleet._id, fleet);
     }
     await this.busService.deleteBus(busToDelete._id);
+    const detailMessage = await firstValueFrom(
+      this.translateService.get('Messages.Success.Delete', {entity: `${busToDelete.name}`}),
+    );
+    const successMessage = await firstValueFrom(
+      this.translateService.get('Messages.Success.DeleteSuccessful'),
+    );
+    this.messageService.add({
+      severity: 'success',
+      summary: successMessage,
+      detail: detailMessage,
+    });
     await this.router.navigate(['/bus-list']);
   }
 
@@ -174,10 +196,16 @@ export class BusFormComponent {
       updatedBus.fleet = fleet?.name || null;
 
       // Show success message
+      const detailMessage = await firstValueFrom(
+        this.translateService.get('Messages.Success.Update', {entity: `${updatedBus.name}`}),
+      );
+      const successMessage = await firstValueFrom(
+        this.translateService.get('Messages.Success.UpdateSuccessful'),
+      );
       this.messageService.add({
         severity: 'success',
-        summary: 'Update Successful',
-        detail: `Bus ${updatedBus.name} updated successfully`,
+        summary: successMessage,
+        detail: detailMessage,
       });
     } catch (error) {
       console.error('Error updating bus:', error);
