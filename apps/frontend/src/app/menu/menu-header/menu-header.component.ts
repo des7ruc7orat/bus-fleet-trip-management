@@ -36,11 +36,11 @@ export class MenuHeaderComponent {
   updateMenuItemsVisibility(loggedIn: boolean): void {
     this.menuHeaderItem.update((items) =>
       items.map((item) => {
-        if (item.label === 'Auth.Login') {
+        if (item.label === 'Login') {
           item.visible = !loggedIn;
         }
         if (this.isLoggedIn()) {
-          item.visible = item.label !== 'Auth.Login';
+          item.visible = item.label !== 'Login';
         }
 
         return item;

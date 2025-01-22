@@ -1,3 +1,6 @@
+@if (!fleetId) {
+  <h1>Bus List</h1>
+}
 <div class="card">
   <p-table
     #dt2
@@ -11,7 +14,7 @@
   >
     <ng-template pTemplate="caption">
       <div class="flex">
-      <p-button (click)="openNewDialog()" icon="fas fa-plus" styleClass="p-button-rounded"></p-button>
+      <p-button (click)="openDialog()" icon="fas fa-plus" styleClass="p-button-rounded"></p-button>
       </div>
     </ng-template>
 
@@ -19,7 +22,9 @@
       <tr>
         <th style="width:22%">Name</th>
         <th style="width:22%">Driver</th>
-        <th style="width:22%">Fleet name</th>
+        @if (!fleetId) {
+          <th style="width:22%">Fleet name</th>
+        }
       </tr>
       <tr>
         <th>
@@ -36,13 +41,16 @@
             placeholder="Search by driver"
             ariaLabel="Filter Driver" />
         </th>
-        <th>
+        @if (!fleetId) {
+
+          <th>
           <p-columnFilter
             type="text"
             field="fleetName"
             placeholder="Search by fleet name"
             ariaLabel="Filter Fleet Name" />
         </th>
+        }
       </tr>
     </ng-template>
 
@@ -50,13 +58,15 @@
       <tr (click)="openDialog(bus)">
         <td>{{ bus.name }}</td>
         <td><p-tag [value]="bus.driver"></p-tag></td>
-        <td><p-tag [value]="bus.fleetName"></p-tag></td>
+        @if (!fleetId) {
+          <td><p-tag [value]="bus.fleet"></p-tag></td>
+        }
       </tr>
     </ng-template>
 
     <ng-template pTemplate="emptymessage">
       <tr>
-        <td colspan="3">No buses found.</td> <!-- Adjusted colspan to match the number of columns -->
+        <td colspan="3">{{ 'Message.NoBuses' | translate }}</td>
       </tr>
     </ng-template>
   </p-table>

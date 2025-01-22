@@ -1,5 +1,24 @@
 <fieldset>
-  <form class="form-container" (ngSubmit)="onSubmit()">
+  <div class="header-container">
+    <div class="spacer"></div>
+    <div class="save-delete-button-container">
+      <p-button icon="fa-solid fa-floppy-disk"
+                [rounded]="true" severity="success" class="form-button" (click)="onSubmit()"></p-button>
+    </div>
+    <div class="save-delete-button-container">
+      @if (fleetId) {
+
+        <p-button
+          (onClick)="onDelete()"
+          icon="fa-solid fa-trash"
+          severity="danger"
+          [rounded]="true"
+          aria-label="Delete"
+        ></p-button>
+      }
+    </div>
+  </div>
+  <form class="form-container">
     <div class="form-row">
       <p-floatLabel class="form-group">
         <input
@@ -88,12 +107,14 @@
           </p-floatLabel>
         </div>
       </p-tabPanel>
+      @if (fleetId) {
+
+        <p-tabPanel header="Busses">
+
+          <app-bus-list [fleetId]="fleetId"></app-bus-list>
+
+        </p-tabPanel>
+      }
     </p-tabView>
-    <!-- Submit or Update Button -->
-    @if (!config?.data) {
-      <p-button label="{{ 'Submit' | translate }}" class="form-button" type="submit"></p-button>
-    } @else {
-      <p-button label="{{ 'Update' | translate }}" class="form-button" (click)="onUpdate()"></p-button>
-    }
   </form>
 </fieldset>

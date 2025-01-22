@@ -1,12 +1,32 @@
 <p-toast></p-toast>
 <fieldset>
-  <form class="form-container" (ngSubmit)="onSubmit()">
+  <div class="header-container">
+    <div class="spacer"></div>
+    <div class="save-delete-button-container">
+        <p-button icon="fa-solid fa-floppy-disk"
+                  [rounded]="true" (onClick)="onSubmit()" severity="success" class="form-button" type="submit"></p-button>
+    </div>
+    <div class="save-delete-button-container">
+
+      @if(busId){
+      <p-button
+        (onClick)="onDelete()"
+        icon="fa-solid fa-trash"
+        severity="danger"
+        [rounded]="true"
+        aria-label="Delete"
+      ></p-button>
+      }
+    </div>
+  </div>
+  <form class="form-container">
     <div class="form-row">
       <p-floatLabel class="form-group">
         <input
           id="bus-name"
           type="text"
           pInputText
+          [required]="true"
           [(ngModel)]="bus().name"
           name="name"
         />
@@ -55,19 +75,25 @@
           id="bus-driver"
           [(ngModel)]="bus().driver"
           [suggestions]="filteredDrivers"
-          (completeMethod)="searchDriver($event)"
+          (completeMethod)="searchDriver()"
           optionLabel="fullName" [minLength]="3"
           placeholder="{{ 'Bus.Form.Driver' | translate }}"
           name="driver"
         ></p-autoComplete>
         <label for="bus-driver">{{ 'Bus.Form.Driver' | translate }}</label>
       </p-floatLabel>
+      <p-floatLabel class="form-group">
+        <p-autoComplete
+          id="bus-fleet"
+          [(ngModel)]="bus().fleet"
+          [suggestions]="filteredFleets"
+          (completeMethod)="searchFleet()"
+          optionLabel="fullFleet" [minLength]="3"
+          placeholder="{{ 'Fleet.Name' | translate }}"
+          name="fleet"
+        ></p-autoComplete>
+        <label for="bus-fleet">{{ 'Fleet.Name' | translate }}</label>
+      </p-floatLabel>
     </div>
-
-    @if (!config?.data) {
-      <p-button label="{{ 'Submit' | translate }}" class="form-button" type="submit"></p-button>
-    } @else {
-      <p-button label="{{ 'Update' | translate }}" class="form-button" (click)="onUpdate()"></p-button>
-    }
   </form>
 </fieldset>

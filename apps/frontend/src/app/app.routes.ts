@@ -4,11 +4,15 @@ import { BusFormComponent } from './components/bus/ui/bus-form/bus-form.componen
 import { BusListComponent } from './components/bus/ui/bus-list/bus-list.component';
 import { AuthGuard } from './components/guards/auth.guard';
 import { FleetFormComponent } from './components/fleet/ui/fleet-form/fleet-form.component';
+import { FleetListComponent } from './components/fleet/ui/fleet-list/fleet-list.component';
 
 export const appRoutes: Route[] = [
   { path: 'login', component: LoginComponent},
-  { path: 'bus-form', component: BusFormComponent, canActivate:[AuthGuard] }, // Protect the route with a guard},
+  { path: 'bus-form', component: BusFormComponent, canActivate:[AuthGuard]}, // Protect the route with a guard},
+  { path: 'bus-form/:id', component: BusFormComponent, canActivate: [AuthGuard] }, // Route with ID
   { path: 'bus-list', component: BusListComponent, canActivate:[AuthGuard] }, // Protect the route with a guard},
   { path: 'fleet-form', component: FleetFormComponent, canActivate:[AuthGuard] }, // Protect the route with a guard},
+  { path: 'fleet-form/:id', component: FleetFormComponent, canActivate: [AuthGuard] }, // Route with ID
+  { path: 'fleet-list', component: FleetListComponent, canActivate:[AuthGuard] }, // Protect the route with a guard},
   { path: '**', redirectTo: 'login' },
 ];

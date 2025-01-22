@@ -33,7 +33,7 @@ export class LoginComponent {
       const response = await this.authService.login(this.loginData);
       this.authService.storeToken(response.access_token);
       // this.updateMenuItemsVisibility();
-      await this.router.navigate(['/bus-list']); // Redirect after login
+      await this.router.navigate(['/fleet-list']); // Redirect after login
     } catch (error) {
       console.error('Login failed', error);
       alert('Invalid credentials');

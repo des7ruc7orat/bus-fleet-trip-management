@@ -1,12 +1,12 @@
 export const menuHeaderItem = [
   {
-    label: 'Auth.Login',  // Translation key
+    label: 'Login',  // Translation key
     icon: 'fas fa-sign-in-alt',
     routerLink: '/login',
     visible: true,  // Initially visible
   },
   {
-    label: 'Bus.Name',  // Translation key
+    label: 'Bus',  // Translation key
     icon: 'fas fa-bus',
     visible: false,  // Initially visible
     items: [
@@ -29,7 +29,7 @@ export const menuHeaderItem = [
     ],
   },
   {
-    label: 'Fleet.Name',  // Translation key
+    label: 'Fleet',  // Translation key
     icon: 'fas fa-warehouse',
     visible: false,
     items: [
@@ -52,7 +52,7 @@ export const menuHeaderItem = [
     ],
   },
   {
-    label: 'Trip.Name',  // Translation key
+    label: 'Trip',  // Translation key
     icon: 'fas fa-route',
     visible: false,
     items: [
@@ -75,7 +75,7 @@ export const menuHeaderItem = [
     ],
   },
   {
-    label: 'Auth.Logout',  // Translation key
+    label: 'Logout',  // Translation key
     icon: 'fas fa-arrow-right-from-bracket',
     visible: false,
   },
