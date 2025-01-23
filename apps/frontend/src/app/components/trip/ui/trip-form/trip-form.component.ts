@@ -1,4 +1,10 @@
-import { Component, inject, signal, WritableSignal } from '@angular/core';
+import {
+  Component,
+  effect,
+  inject,
+  signal,
+  WritableSignal,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FloatLabelModule } from 'primeng/floatlabel';
 import { InputTextModule } from 'primeng/inputtext';
@@ -53,14 +59,20 @@ export class TripFormComponent {
   private route: ActivatedRoute = inject(ActivatedRoute);
   private router: Router = inject(Router);
   private userService: UserService = inject(UserService);
+
   constructor() {
-    this.route.paramMap.subscribe(async (params) => {
-      this.tripId = params.get('id')!; // Extract the 'id' parameter
-      if (this.tripId) {
-        await this.loadTrip(this.tripId); // Call a method to load trip details
-      } else {
-        this.trip.set({});
-      }
+    effect(() => {
+      this.route.paramMap.subscribe(async (params) => {
+        this.tripId = params.get('id')!; // Extract the 'id' parameter
+        if (this.tripId) {
+          await this.loadTrip(this.tripId); // Call a method to load trip details
+          console.log('beginning', this.beginningPoint());
+          console.log('ending', this.endingPoint());
+          console.log(this.trip());
+        } else {
+          this.trip.set({});
+        }
+      });
     });
   }
 
@@ -75,6 +87,7 @@ export class TripFormComponent {
       console.error('Error fetching buses:', err);
     }
   }
+
   public async searchAddress() {
     try {
       const addresses = await this.addressService.getAllAddresses();
@@ -103,20 +116,22 @@ export class TripFormComponent {
       } else {
         // Create a new trip
         const newBeginningPoint = await this.addressService.createAddress(
-          beginningPoint,
+          beginningPoint
         );
         const newEndingPoint = await this.addressService.createAddress(
-          endingPoint,
+          endingPoint
         );
         currentTrip.beginningPoint = newBeginningPoint._id;
         currentTrip.endingPoint = newEndingPoint._id;
         const createdTrip = await this.tripService.create(currentTrip);
         await this.router.navigate(['/trip-form', createdTrip['_id']]);
         const detailMessage = await firstValueFrom(
-          this.translateService.get('Messages.Success.Create', {entity: `${createdTrip.name}`}),
+          this.translateService.get('Messages.Success.Create', {
+            entity: `${createdTrip.name}`,
+          })
         );
         const successMessage = await firstValueFrom(
-          this.translateService.get('Messages.Success.CreateSuccessful'),
+          this.translateService.get('Messages.Success.CreateSuccessful')
         );
         this.messageService.add({
           severity: 'success',
@@ -135,10 +150,12 @@ export class TripFormComponent {
     await this.addressService.deleteAddress(this.beginningPoint()._id);
     await this.addressService.deleteAddress(this.endingPoint()._id);
     const detailMessage = await firstValueFrom(
-      this.translateService.get('Messages.Success.Delete', {entity: `${this.trip().name}`}),
+      this.translateService.get('Messages.Success.Delete', {
+        entity: `${this.trip().name}`,
+      })
     );
     const successMessage = await firstValueFrom(
-      this.translateService.get('Messages.Success.DeleteSuccessful'),
+      this.translateService.get('Messages.Success.DeleteSuccessful')
     );
     this.messageService.add({
       severity: 'success',
@@ -157,7 +174,6 @@ export class TripFormComponent {
     }
 
     try {
-
       const buses = await this.busService.getAllBuses();
       const busName =
         typeof updatedTrip.bus === 'string'
@@ -169,10 +185,12 @@ export class TripFormComponent {
       updatedTrip.bus = bus?.name || null;
       // Show success message
       const detailMessage = await firstValueFrom(
-        this.translateService.get('Messages.Success.Update', {entity: `${updatedTrip.name}`}),
+        this.translateService.get('Messages.Success.Update', {
+          entity: `${updatedTrip.name}`,
+        })
       );
       const successMessage = await firstValueFrom(
-        this.translateService.get('Messages.Success.UpdateSuccessful'),
+        this.translateService.get('Messages.Success.UpdateSuccessful')
       );
       this.messageService.add({
         severity: 'success',
@@ -187,14 +205,18 @@ export class TripFormComponent {
   private async loadTrip(id: string) {
     try {
       const trip = await this.tripService.getById(id);
-      trip.startingTime = new Date(trip.startingTime).toISOString().slice(0, 16); // For <input type="datetime-local">
-      trip.arrivingTime = new Date(trip.arrivingTime).toISOString().slice(0, 16);
+      trip.startingTime = new Date(trip.startingTime)
+        .toISOString()
+        .slice(0, 16); // For <input type="datetime-local">
+      trip.arrivingTime = new Date(trip.arrivingTime)
+        .toISOString()
+        .slice(0, 16);
       const beginningPoint = await this.addressService.getAddressById(
-        trip['beginningPoint'],
+        trip['beginningPoint']
       ); // Assuming this method exists
       this.beginningPoint.set(beginningPoint);
       const endingPoint = await this.addressService.getAddressById(
-        trip['endingPoint'],
+        trip['endingPoint']
       ); // Assuming this method exists
       this.endingPoint.set(endingPoint);
       const bus = await this.busService.getBusById(trip['bus']); // Assuming this method exists
